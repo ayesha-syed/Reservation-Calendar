@@ -10,11 +10,8 @@ const init_data_path = './init_data.json';
 // Parse application/json
 app.use(bodyParser.json());
 
-// Stub data
-const locale = 'Asia/Dubai';
 let data = require(init_data_path).data;
 
-// Probably not the safest way to handle CORS
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT');
@@ -54,7 +51,7 @@ app.get('/reserve/:start/:end', function (request, response) {
   });
 });
 
-// End-point to change
+// Post reservation
 app.post('/reserve', function (request, response) {
   var body = request.body;
   var date = body.time;
@@ -68,8 +65,6 @@ app.post('/reserve', function (request, response) {
   var reserved = body.reserved;
   var tenantName = body.tenantName;
 
-  // date = moment.unix(date).startOf('day').unix();
-
   var tenantData = {
     'tenantName': tenantName,
     'time': date,
@@ -80,6 +75,7 @@ app.post('/reserve', function (request, response) {
     return moment.unix(date).isSame(moment.unix(nightTime), 'day');
   });
 
+  // If day is already reserved, send alert
   if (reserved && isReserved) {
     response.status(400);
     response.send('Slot already reserved');
@@ -90,7 +86,7 @@ app.post('/reserve', function (request, response) {
     response.status(400);
     response.send('Slot not found');
     return;
-  }
+}
 
   if (reserved) {
     data.push(tenantData);
@@ -105,6 +101,7 @@ app.post('/reserve', function (request, response) {
     data: data
   };
 
+  // Update init_data.json
   fs.writeFileSync('./init_data.json', JSON.stringify(updatedData));
 
   send(response, {
@@ -179,14 +176,12 @@ app.post('/update-init-data', function (request, response) {
     success: true
   });
 });
+
 app.use(express.static(__dirname + '/lib'));
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/lib/index.html');
 });
-
-
-
 
 var port = 3000;
 console.info('API server listening at http://localhost:' + port);

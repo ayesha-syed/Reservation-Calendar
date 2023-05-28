@@ -134,3 +134,43 @@ body {
   border: none;
   cursor: pointer;
 }
+
+.day {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 60px; /* Increase the height to accommodate the tenant name */
+  position: relative;
+}
+
+.date {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.tenant {
+  font-size: 12px;
+}
+
+.actions {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.day:hover .actions {
+  opacity: 1;
+}

@@ -12,7 +12,7 @@
     <div class="calendar-header">
       <button class="btn btn-nav" ng-click="calendar.previousMonth()">&lt;</button>
       <button class="btn btn-nav" ng-click="calendar.nextMonth()">&gt;</button>
-      <h2 class="month-year">{{ calendar.month | date: 'MMMM yyyy' }} | {{ calendar.weeks.length }} weeks</h2>
+      <h2 class="month-year">{{ calendar.month | date: 'MMMM yyyy' }} </h2>
     <table>
       <thead>
         <tr>
@@ -21,28 +21,30 @@
       </thead>
       <tbody>
         <tr ng-repeat="week in calendar.weeks">
+          
+          
           <td ng-repeat="day in week">
-            <div class="day" ng-class="{ 'reserved': day.reserved }" ng-click="calendar.showTenantModal(day)">
-              <span class="date">{{ day.date | date: 'd' }}</span>
-              <span class="tenant" ng-if="day.tenantName">{{ day.tenantName }}</span>
+            <div class="day" ng-class="{ 'reserved': day.reserved }" ng-click="day.date && calendar.showTenantModal(day)">
+              <div class="date">{{ day.date | date: 'd' }}</div>
+              <div class="tenant" ng-if="day.tenantName">{{ day.tenantName }}</div>
               <div ng-if="day.tenantName" class="actions">
                 <button ng-click="calendar.deleteTenant(day)">Delete</button>
               </div>
             </div>
-            
           </td>
+          
+          
+
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Tenant Modal -->
 <!-- Tenant Modal -->
 <div class="modal" ng-show="calendar.showModal">
   <div class="modal-content">
     <h2 ng-if="!calendar.selectedDay.reserved">Add Tenant</h2>
     <p>Date: {{ calendar.selectedDay.date | date: 'dd/MM/yyyy' }}</p>
-    <p>Unix Time: {{ calendar.selectedDay.date.getTime()}}</p>
     <p ng-if="calendar.selectedDay.reserved">Tenant: {{ calendar.selectedDay.tenantName }}</p>
     <form ng-submit="calendar.saveTenant()">
       <input type="text" ng-model="calendar.tenantName" placeholder="Enter tenant name" required>
@@ -54,7 +56,7 @@
 </div>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular.min.js"></script>
   <script src="app.js"></script>
 </body>
 

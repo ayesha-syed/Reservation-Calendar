@@ -16,7 +16,7 @@ body {
   padding: 10px;
   display: inline-block;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add this line to add a shadow effect */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
   background-color: #fff;
 }
 
@@ -81,7 +81,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 40px;
-  height: 60px; /* Increase the height to accommodate the tenant name */
+  height: 60px; 
   position: relative;
 }
 

@@ -62,4 +62,4 @@ Accept: application/json
 
 Changes In Server.JS
 --------
-The server.js file has been slightly modified to make changes in the init_data.json file.
+The server.js file has been slightly modified to allow for saving tanent information.

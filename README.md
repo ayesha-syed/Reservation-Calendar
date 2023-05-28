@@ -10,9 +10,15 @@ A calendar that keeps track of reservations for a single room. It has the follow
 - Remove tennants from a day.
 - Names of tenants are displayed on the calendar.
 
+The calendar:
+
 ![Calendar](images/calendar.png)
 
+Adding a tenant:
+
 ![Add Tenant](images/addtenant.png)
+
+Removing a tenant:
 
 ![Remove Tenant](images/removetenant.png)
 
